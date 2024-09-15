@@ -1,0 +1,99 @@
+body {
+	background-image: url('background.jpeg');    /* image from https://wallpapers.com/background/cream-background-z4uen4ouoqv434pa.html */
+}
+
+.block1 {
+	position: absolute;
+	display: block;
+	width: 59%;
+	margin-left: 20%;
+	padding: 14px 28px;
+	font-size: 16px;
+	text-align: center;
+	background-color: #322d29;
+	color: white;
+	border-radius: 50px;
+	height: 100px;
+	font-size: 35px;
+	font-family: Comic Sans;
+	font-weight: bold;
+    border-style: solid;
+	border-width: 2px;
+	border-color: #322d29;
+}
+
+.block2 {
+	position: absolute;
+	display: block;
+	width: 59%;
+	margin-left: 20%;
+	padding: 14px 28px;
+	font-size: 16px;
+	text-align: center;
+	background-color: #322d29;
+	color: white;
+	border-radius: 50px;
+	height: 100px;
+	font-size: 35px;
+	font-family: Comic Sans;
+	font-weight: bold;
+    border-style: solid;
+	border-width: 2px;
+	border-color: #322d29;
+}
+
+.block3 {
+	position: absolute;
+	display: block;
+	width: 59%;
+	margin-left: 20%;
+	padding: 14px 28px;
+	font-size: 16px;
+	text-align: center;
+	background-color: #322d29;
+	color: white;
+	border-radius: 50px;
+	height: 100px;
+	font-size: 35px;
+	font-family: Comic Sans;
+	font-weight: bold;
+    border-style: solid;
+	border-width: 2px;
+	border-color: #322d29;
+}
+
+
+
+.h1 {
+	text-align: center;
+	width: 32%;
+	margin-left: 34%;
+	font-size: 350%;
+}
+
+.h2 {
+	text-align: center;
+	width: 30%;
+	margin-left: 35%;
+	font-size: 300%;
+	margin-top: 0.05%;
+}
+
+
+
+.home {
+	display: block;
+	border: none;
+	padding: 14px 28px;
+	text-align: center;
+	background-color: white;
+	border-radius: 50px;
+	height: 85px;
+	font-size: 20px;
+	font-family: Comic Sans;
+	margin-left: 10px;
+	margin-top: 0.7%;
+	border-style: solid;
+	border-width: 2px;
+	border-color: black;
+}
