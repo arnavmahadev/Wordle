@@ -193,7 +193,7 @@ array = [ "abbey", "about", "above", "abuse", "actor", "acute", "adapt", "admit"
                         guess = guess + boxes[i].textContent;
                     }
     
-                    applyColorsToBoxes(guess, answer.split(''), boxes);   // .split from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split
+                    applyColorsToBoxes(guess, answer, boxes);
     
                     if (checkGuess(guess, answer)) {
                         alert("Congratulations! You've guessed the correct word: " + answer);
