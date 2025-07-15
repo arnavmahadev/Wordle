@@ -10,15 +10,21 @@
     </button>
 </head>
 
-<body class = "background">
-    <h1 class="h1">
-		Guess a Word!
-	</h1>
-    <div id="board">
+<body class="background">
+    <div id="loadingOverlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; display: flex; align-items: center; justify-content: center; font-size: 24px;">
+        Loading Word List...
     </div>
-    <br>
-    <br>
+
+    <h1 class="h1">
+        Guess a Word!
+    </h1>
+
+    <div id="board"></div>
+
+    <br><br>
+
     <button class="block1" type="button" id="replayButton" style="display: none;" onclick="goToNextPage('5word.html')">REPLAY!</button>
+
     <script src="5word.js"></script>
 </body>
 
