@@ -2,15 +2,15 @@ let validGuesses = new Set();
 let wordListLoaded = false;
 
 // Fetch valid word list
-fetch('https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt')
-    .then(response => response.text())
-    .then(text => {
-        text.split('\n').forEach(word => validGuesses.add(word.trim().toUpperCase()));
+fetch('https://raw.githubusercontent.com/dwyl/english-words/master/words_dictionary.json')
+    .then(response => response.json())
+    .then(json => {
+        Object.keys(json).forEach(word => validGuesses.add(word.toUpperCase()));
         wordListLoaded = true;
-        console.log("Word list loaded, total words:", validGuesses.size);
         document.getElementById("loadingOverlay").style.display = "none";
         gameBoard();
     })
+
     .catch(() => {
         alert("Failed to load word list!");
         document.getElementById("loadingOverlay").innerText = "Failed to load word list!";
