@@ -133,6 +133,9 @@ array = [ "abbey", "about", "above", "abuse", "actor", "acute", "adapt", "admit"
     function applyColorsToBoxes(guess, answer, boxes) {
         let letterCount = {};
     
+        answer = answer.toUpperCase();
+        guess = guess.toUpperCase();
+    
         for (let char of answer) {
             letterCount[char] = (letterCount[char] || 0) + 1;
         }
@@ -154,6 +157,7 @@ array = [ "abbey", "about", "above", "abuse", "actor", "acute", "adapt", "admit"
             }
         }
     }
+
 
     
     document.addEventListener("keydown", (keypress) => {         //keydown from https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event
@@ -193,6 +197,7 @@ array = [ "abbey", "about", "above", "abuse", "actor", "acute", "adapt", "admit"
                         guess = guess + boxes[i].textContent;
                     }
     
+                    guess = guess.toUpperCase();
                     applyColorsToBoxes(guess, answer, boxes);
     
                     if (checkGuess(guess, answer)) {
