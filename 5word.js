@@ -1,16 +1,23 @@
 let validGuesses = new Set();
 let wordListLoaded = false;
 
+// Fetch valid word list
 fetch('https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt')
     .then(response => response.text())
     .then(text => {
         text.split('\n').forEach(word => validGuesses.add(word.trim().toUpperCase()));
         wordListLoaded = true;
+        console.log("Word list loaded, total words:", validGuesses.size);
+        document.getElementById("loadingOverlay").style.display = "none";
     })
-    .catch(() => alert("Failed to load word list!"));
+    .catch(() => {
+        alert("Failed to load word list!");
+        document.getElementById("loadingOverlay").innerText = "Failed to load word list!";
+    });
 
 let answerIndex = Math.floor(Math.random() * array.length);
 let answer = array[answerIndex].toUpperCase();
+console.log("Answer is:", answer);
 
 function gameBoard() {
     let board = document.getElementById("board");
@@ -23,6 +30,15 @@ function gameBoard() {
             let box = document.createElement("div");
             box.className = "box";
             box.contentEditable = "true";
+            box.style.border = "1px solid black";
+            box.style.width = "40px";
+            box.style.height = "40px";
+            box.style.display = "inline-block";
+            box.style.textAlign = "center";
+            box.style.verticalAlign = "middle";
+            box.style.lineHeight = "40px";
+            box.style.fontSize = "24px";
+            box.style.margin = "2px";
             row.appendChild(box);
         }
 
@@ -41,7 +57,6 @@ function checkGuess(guess, answer) {
 
 function applyColorsToBoxes(guess, answer, boxes) {
     let letterCount = {};
-
     answer = answer.toUpperCase();
     guess = guess.toUpperCase();
 
@@ -71,7 +86,7 @@ document.addEventListener("keydown", (keypress) => {
     let pressedKey = keypress.key;
     let activeBox = document.activeElement;
 
-    if (!wordListLoaded) return;  // Prevent input until word list is ready
+    if (!wordListLoaded) return;  // Don't allow actions before word list loads
 
     if (activeBox && activeBox.classList.contains("box")) {
         if (pressedKey.length === 1) {
@@ -109,6 +124,7 @@ document.addEventListener("keydown", (keypress) => {
                 guess = guess.toUpperCase();
 
                 if (!validGuesses.has(guess)) {
+                    console.log(`Invalid guess attempted: ${guess}`);
                     alert("Not a valid word!");
                     for (let i = 0; i < boxes.length; i++) {
                         boxes[i].contentEditable = "true";
@@ -146,16 +162,6 @@ document.addEventListener("keydown", (keypress) => {
         }
     }
 });
-
-function returnToHome(homePage) {
-    window.location.href = homePage;
-    location.replace(homePage);
-}
-
-function goToNextPage(nextPage) {
-    window.location.href = nextPage;
-    location.replace(nextPage);
-}
 
 function showReplayButton() {
     let replayButton = document.getElementById("replayButton");
