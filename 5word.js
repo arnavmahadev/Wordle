@@ -9,6 +9,7 @@ fetch('https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.t
         wordListLoaded = true;
         console.log("Word list loaded, total words:", validGuesses.size);
         document.getElementById("loadingOverlay").style.display = "none";
+        gameBoard();
     })
     .catch(() => {
         alert("Failed to load word list!");
@@ -48,8 +49,6 @@ function gameBoard() {
     let firstBox = document.querySelector(".box");
     firstBox.focus();
 }
-
-gameBoard();
 
 function checkGuess(guess, answer) {
     return guess.toUpperCase() === answer.toUpperCase();
