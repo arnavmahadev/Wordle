@@ -130,36 +130,35 @@ array = ["able", "acid", "acre", "aged", "aide", "akin", "alas", "ally", "also",
         return guess.toUpperCase() === answer.toUpperCase();
     }
     
-    function applyColorsToBoxes(guess, tempAnswer, boxes) {
-        for (let i = 0; i < guess.length; i++) {
-            let box = boxes[i];
-            let letter = guess.charAt(i);
+    function applyColorsToBoxes(guess, answer, boxes) {
+        let letterCount = {};
     
-            if (tempAnswer[i] === letter) {
-                box.style.backgroundColor = "green";
-                tempAnswer[i] = null; 
+        answer = answer.toUpperCase();
+        guess = guess.toUpperCase();
+    
+        for (let char of answer) {
+            letterCount[char] = (letterCount[char] || 0) + 1;
+        }
+    
+        for (let i = 0; i < guess.length; i++) {
+            if (guess[i] === answer[i]) {
+                boxes[i].style.backgroundColor = "green";
+                letterCount[guess[i]]--;
             }
         }
     
         for (let i = 0; i < guess.length; i++) {
-            let box = boxes[i];
-            let letter = guess.charAt(i);
-    
-            if (tempAnswer.includes(letter) && tempAnswer[i] !== null) {
-                box.style.backgroundColor = "yellow";
-                tempAnswer[tempAnswer.indexOf(letter)] = null;
-            }
-        }
-    
-        for (let i = 0; i < guess.length; i++) {
-            let box = boxes[i];
-            if (box.style.backgroundColor === "") {
-                box.style.backgroundColor = "gray";
+            if (boxes[i].style.backgroundColor === "green") continue;
+            if (letterCount[guess[i]] > 0) {
+                boxes[i].style.backgroundColor = "yellow";
+                letterCount[guess[i]]--;
+            } else {
+                boxes[i].style.backgroundColor = "gray";
             }
         }
     }
-    
-    
+
+
     
     document.addEventListener("keydown", (keypress) => {         //keydown from https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event
         let pressedKey = keypress.key;           
@@ -198,7 +197,8 @@ array = ["able", "acid", "acre", "aged", "aide", "akin", "alas", "ally", "also",
                         guess = guess + boxes[i].textContent;
                     }
     
-                    applyColorsToBoxes(guess, answer.split(''), boxes);   // .split from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split
+                    guess = guess.toUpperCase();
+                    applyColorsToBoxes(guess, answer, boxes);
     
                     if (checkGuess(guess, answer)) {
                         alert("Congratulations! You've guessed the correct word: " + answer);
