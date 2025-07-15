@@ -130,30 +130,31 @@ array = [ "abbey", "about", "above", "abuse", "actor", "acute", "adapt", "admit"
         return guess.toUpperCase() === answer.toUpperCase();
     }
     
-    function applyColorsToBoxes(guess, tempAnswer, boxes) {
+    function applyColorsToBoxes(guess, answer, boxes) {
+        let letterCount = {};
+    
+        for (let char of answer) {
+            letterCount[char] = (letterCount[char] || 0) + 1;
+        }
+    
         for (let i = 0; i < guess.length; i++) {
-            if (tempAnswer[i] === guess[i]) {
+            if (guess[i] === answer[i]) {
                 boxes[i].style.backgroundColor = "green";
-                tempAnswer[i] = null;
+                letterCount[guess[i]]--;
             }
         }
     
         for (let i = 0; i < guess.length; i++) {
-            if (boxes[i].style.backgroundColor !== "green") {
-                let idx = tempAnswer.indexOf(guess[i]);
-                if (idx !== -1) {
-                    boxes[i].style.backgroundColor = "yellow";
-                    tempAnswer[idx] = null;
-                }
-            }
-        }
-    
-        for (let i = 0; i < guess.length; i++) {
-            if (boxes[i].style.backgroundColor === "") {
+            if (boxes[i].style.backgroundColor === "green") continue;
+            if (letterCount[guess[i]] > 0) {
+                boxes[i].style.backgroundColor = "yellow";
+                letterCount[guess[i]]--;
+            } else {
                 boxes[i].style.backgroundColor = "gray";
             }
         }
     }
+
     
     document.addEventListener("keydown", (keypress) => {         //keydown from https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event
         let pressedKey = keypress.key;           
